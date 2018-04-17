@@ -1,69 +1,79 @@
 package data;
-import java.util.List;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Person {
+	private String _givenName;
+	private String _surname;
+	private Gender _gender;
+	private int _age;
+	private Map<Integer, ArticleInfo> _selling = new ConcurrentHashMap<>();
+	private Map<Integer, ArticleInfo> _buying = new ConcurrentHashMap<>();
+	private int _discount;
 
-	private String surname;
-	private String givenname;
-	private Integer age;
-	private Gender gender;
-	private boolean vendor;
-	private List<Transaction> buying;
-	private List<Transaction> selling;
+	public String getGivenName() {
+		return _givenName;
+	}
+
+	public void setGivenName(String givenName) {
+		_givenName = givenName;
+	}
 
 	public String getSurname() {
-		return surname;
+		return _surname;
 	}
 
 	public void setSurname(String surname) {
-		this.surname = surname;
-	}
+		_surname = surname;
 
-	public String getGivenname() {
-		return givenname;
-	}
-
-	public void setGivenname(String givenname) {
-		this.givenname = givenname;
-	}
-
-	public Integer getAge() {
-		return age;
-	}
-
-	public void setAge(Integer age) {
-		this.age = age;
 	}
 
 	public Gender getGender() {
-		return gender;
+		return _gender;
 	}
 
 	public void setGender(Gender gender) {
-		this.gender = gender;
+		_gender = gender;
 	}
 
-	public List<Transaction> getBuying() {
-		return buying;
+	public boolean isFemale() {
+		return _gender == Gender.Female;
 	}
 
-	public void setBuying(List<Transaction> buying) {
-		this.buying = buying;
+	public int getAge() {
+		return _age;
 	}
 
-	public List<Transaction> getSelling() {
-		return selling;
-	}
-
-	public void setSelling(List<Transaction> selling) {
-		this.selling = selling;
+	public void setAge(int age) {
+		_age = age;
 	}
 
 	public boolean isVendor() {
-		return vendor;
+		return _selling.size() > 0;
 	}
 
-	public void setVendor(boolean vendor) {
-		this.vendor = vendor;
+	public int getDiscount() {
+		return _discount;
+	}
+
+	public void setDiscount(int discount) {
+		_discount = discount;
+	}
+
+	public Map<Integer, ArticleInfo> getSelling() {
+		return _selling;
+	}
+
+	public void setSelling(Map<Integer, ArticleInfo> selling) {
+		_selling = selling;
+	}
+
+	public Map<Integer, ArticleInfo> getBuying() {
+		return _buying;
+	}
+
+	public void setBuying(Map<Integer, ArticleInfo> buying) {
+		_buying = buying;
 	}
 }
