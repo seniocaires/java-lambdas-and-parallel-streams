@@ -15,10 +15,16 @@ public class FixFilter {
 		for (Person person : getPersonsLessThan20Years(Persons.getInstance().getPersons())) {
 			System.out.println(person.getAge() + " \t" + person.getGivenName() + " " + person.getSurname());
 		}
-		
+
 		System.out.println("Persons Between 30 and 40 Years Old");
 		System.out.println("Age \t Name");
 		for (Person person : getPersonsByAgeRange(Persons.getInstance().getPersons(), 30, 40)) {
+			System.out.println(person.getAge() + " \t" + person.getGivenName() + " " + person.getSurname());
+		}
+
+		System.out.println("Persons By Condition");
+		System.out.println("Age \t Name");
+		for (Person person : getPersonsByCondition(Persons.getInstance().getPersons(), new YoungerThanCondition(20))) {
 			System.out.println(person.getAge() + " \t" + person.getGivenName() + " " + person.getSurname());
 		}
 	}
@@ -37,6 +43,16 @@ public class FixFilter {
 		List<Person> result = new ArrayList<>();
 		for (Person person : persons) {
 			if (person.getAge() >= from && person.getAge() <= to) {
+				result.add(person);
+			}
+		}
+		return result;
+	}
+
+	public static List<Person> getPersonsByCondition(List<Person> persons, Condition<Person> condition) {
+		List<Person> result = new ArrayList<>();
+		for (Person person : persons) {
+			if (condition.test(person)) {
 				result.add(person);
 			}
 		}
