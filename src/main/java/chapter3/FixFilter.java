@@ -27,6 +27,17 @@ public class FixFilter {
 		for (Person person : getPersonsByCondition(Persons.getInstance().getPersons(), new YoungerThanCondition(20))) {
 			System.out.println(person.getAge() + " \t" + person.getGivenName() + " " + person.getSurname());
 		}
+
+		System.out.println("Persons By Condition - Anonymous");
+		System.out.println("Age \t Name");
+		for (Person person : getPersonsByCondition(Persons.getInstance().getPersons(), new Condition<Person>() {
+			@Override
+			public boolean test(Person person) {
+				return person.getAge() < 20;
+			}
+		})) {
+			System.out.println(person.getAge() + " \t" + person.getGivenName() + " " + person.getSurname());
+		}
 	}
 
 	public static List<Person> getPersonsLessThan20Years(List<Person> persons) {
